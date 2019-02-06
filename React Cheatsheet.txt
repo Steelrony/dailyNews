@@ -1,0 +1,158 @@
+/-------------------- REACT-REDUX CHEATSHEET -----------------------/
+Author: Nnaemeka Obioha
+Git: ben4code
+
+
+
+//Store.js
+1. Install redux, react-redux, redux-thunk.
+---------------------------------------------------------------------
+import {createStore, applyMiddleware, compose} from 'redux';
+import rootReducer from './reducers/index';
+import thunk from 'redux-thunk';
+
+const initialState = {};
+const middleware = [thunk]
+
+const store = createStore(rootReducer, initialState, 
+    compose(applyMiddleware(...middleware), 
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+));
+export default store;
+---------------------------------------------------------------------
+
+
+
+// Root component
+1. Import {Provider} from react-redux
+
+2. Wrap the root component with the Provider
+
+3. Import store from store.js.
+
+4. Pass props as store into the provider. 
+
+
+
+// Reducers
+1. Create reducers folder and index.js.
+
+2. In reducers/index.js import combineReducers from redux.
+
+3. The combineReducers function takes an object as a argument and is assigned a variable rootReducer.
+
+4. Create a file resourceReducers/resource_reducer.js.
+
+----------------------------------------------------
+import {combineReducers} from 'redux'
+import carsReducer from './cars_reducers'
+
+export default combineReducers({
+    cars: carsReducer
+}) 
+------------------------------------------------------
+ 
+5. Here, export a function with arguments of state=prevState and action.
+
+6. Inside the func, create a switch statement with arg of action.type and create cases as required: case abc: return action.payload
+
+7. Import resource_reducer into index file and pass as value of the required obj: {resourceTitle: resource_reducer}
+
+------------------------------------------------------------
+import { getCars } from '../actions/carsActions';
+const initialState = {
+    cars: [
+        { id: 1, name: 'Benz' },
+        { id: 2, name: 'BMW' }
+    ]
+
+}
+export default function (state = initialState, action) {
+    switch (action.type) {
+        case GET_CARS:
+            return {
+                ...state
+            }
+
+        default:
+            return state
+    }
+}
+------------------------------------------------------------
+
+8. Import reducers/index (usually as rootReducer) in root component and pass as arg to the store prop of Provider.
+
+9. At this point the GET_CARS import from action/types does not exist yet. We will create it next.
+
+
+
+
+//Actions
+1. Create the folder actions and types.js.
+
+2. Here, we create a named export of a constant variable called 'GET_CARS'.
+------------------------------------------------------------
+export const GET_CARS = 'GET_CARS'; 
+------------------------------------------------------------
+
+3. Create a resourceActions.js file.
+
+4. Import actions/types into this file.
+
+5. Create a function that will return the action type and payload if neccessary.
+
+------------------------------------------------------------
+import {GET_CARS} from './types';
+
+export const getCars = () => {
+    return {
+        type: GET_CARS
+    }
+}
+------------------------------------------------------------
+
+
+
+
+
+//Stateful component
+1. Import connect from react-redux and {GET_CARS} from actions/types file.
+
+2. Create a func of mapStateToProps.
+
+3. Here, we return an obj: {resource: state.resourceTitle.reducerState}
+
+------------------------------------------------------------
+import { GET_CARS } from '../actions/types';
+
+const mapStateToProps = (state) => {
+    return {
+        cars: state.cars.cars
+    }
+};
+
+export default connect(mapStateToProps, { getCars })(Home);
+------------------------------------------------------------
+
+4.Lastly remember to import the Stateful component into the root component :) 
+
+
+
+
+//Async requests in redux (Action Getters)
+1. Import the required action type constant and axios.
+
+2. Modify the action logic as follows:
+------------------------------------------------------------
+import {GET_CONTACTS} from './types';
+
+export const getContacts = () => dispatch => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+    .then(res => {
+        return dispatch({type: GET_CONTACTS, payload: res.data})
+        }    
+    );    
+}
+------------------------------------------------------------
+
+
