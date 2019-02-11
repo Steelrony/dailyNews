@@ -10,6 +10,9 @@ a {
     color: inherit
 }
 
+/*=============================================
+                   HEADER 
+==============================================*/ 
 
 
 header,
@@ -19,4 +22,43 @@ footer {
     font-family: 'Sedgwick Ave Display', cursive;
     font-size: 22px;
     padding: 10px 0;
+}
+
+/*=============================================
+                   LATEST 
+==============================================*/
+
+.home-latest {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.home-latest .item .image_cover {
+    position: relative;
+    background-size: cover !important;
+    height: 200px;
+}
+
+.home-latest .item .description {
+    position: absolute;
+    bottom: 0;
+}
+
+.home-latest .item .description span {
+    background: #00BCD4;
+    padding: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+}
+
+.home-latest .item .description div {
+    padding: 10px;
+    font-size: 15px;
+    font-family: Roboto;
+    font-weight: 700;
+    color: #FFF;
+    background: rgba(53, 53, 53, 0.64);
+    width: 40%;
 }
