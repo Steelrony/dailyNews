@@ -1,4 +1,4 @@
-import { GET_LATESTS, DELETE_LATEST, ADD_LATEST } from '../actions/types';
+import { GET_LATESTS } from '../actions/types';
 
 const initialState = {
     latests: []
@@ -13,11 +13,7 @@ export default function(state = initialState, action) {
     };
     default:
     return state;
-    // case DELETE_LATEST:
-    // return{
-    //     ...state
-    // }
-  }
     
-    
+  }    
 }
+

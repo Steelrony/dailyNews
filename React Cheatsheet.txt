@@ -30,7 +30,8 @@ export default store;
 
 3. Import store from store.js.
 
-4. Pass props as store into the provider. 
+4. Pass store as props into the provider. 
+        <Provider store={store}>
 
 
 
@@ -45,7 +46,7 @@ export default store;
 
 ----------------------------------------------------
 import {combineReducers} from 'redux'
-import carsReducer from './cars_reducers'
+import carsReducer from './cars_reducer'
 
 export default combineReducers({
     cars: carsReducer
@@ -61,17 +62,15 @@ export default combineReducers({
 ------------------------------------------------------------
 import { getCars } from '../actions/carsActions';
 const initialState = {
-    cars: [
-        { id: 1, name: 'Benz' },
-        { id: 2, name: 'BMW' }
-    ]
-
+    cars: []
 }
+
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_CARS:
             return {
-                ...state
+                ...state,
+                cars: action.payload
             }
 
         default:
