@@ -6,7 +6,6 @@ const URL = "http://localhost:3004";
 
 export const getOthers = () => async dispatch => {
     const res =  await axios.get(`${URL}/articles/?_order=desc&_start=3&_end=10`);
-    console.log('otheractions', res.data)
     dispatch({
         type: GET_OTHER,
         payload: res.data

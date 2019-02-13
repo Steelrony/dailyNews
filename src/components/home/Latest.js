@@ -22,7 +22,6 @@ const showLatest = ({latest}) => {
 }
 
 const LatestNews = (props) => {
-  console.log('latestComp', props);
   return (
     <div className="home-latest">
       {showLatest(props)}

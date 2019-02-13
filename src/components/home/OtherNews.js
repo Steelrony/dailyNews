@@ -11,7 +11,20 @@ const renderOtherNews = ({otherNews}) => {
               className="left"
               style={{background: `url(/images/articles/${item.img})`}}
             >
-              hhhhh
+            </div>
+            <div className="right">
+              <h3>{item.title}</h3>
+              <div className="category-tag">{item.category}</div>
+              <div className="tags">
+                <span>
+                  <i className="fa fa-eye"></i>
+                  {item.views}
+                </span>
+                <span>
+                  <i className="fa fa-thumbs-up"></i>
+                  {item.likes[0]}
+                </span>
+              </div>
             </div>
           
           </Link>
@@ -22,7 +35,6 @@ const renderOtherNews = ({otherNews}) => {
 }
 
 const OtherNews = (props) => {
-  console.log('other newsss', props)
   return (
     <div className="other-news">
       <h2>OTHER NEWS</h2>
